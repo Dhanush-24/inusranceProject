@@ -20,7 +20,7 @@ services:
     ports:
       - "5001:5001"
     environment:
-      MONGO_URI=mongodb://mongo-container:27017/insuranceDekho  
+      - MONGO_URI=mongodb://mongo-container:27017/insuranceDekho  
     depends_on:
       - mongo
     networks:
