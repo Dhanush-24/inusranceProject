@@ -1,0 +1,43 @@
+.dashboard-container {
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 2rem 1rem;
+}
+
+.sidebar h5 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar .form-check {
+  margin-bottom: 1.2rem;
+}
+
+.main-content {
+  padding: 2rem;
+}
+
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.user-card {
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  max-width: 400px;
+}
+
+.policy-display {
+  margin-top: 2rem;
+}

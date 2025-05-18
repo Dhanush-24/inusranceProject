@@ -1,0 +1,393 @@
+.home-page {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 160px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.user-profile h6 {
+    margin: 0;
+    font-size: 14px;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.user-profile button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.user-profile button:hover {
+    background-color: #0056b3;
+}
+
+.insurance-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 20px;
+  padding: 20px;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+  min-height: 180px;
+  height: 100%;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+}
+
+.option-card img {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.option-card h3 {
+  font-size: 16px;
+  margin: 5px 0;
+  white-space: nowrap;
+}
+
+.option-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  white-space: nowrap;
+}
+
+
+
+@media (max-width: 1024px) {
+    .option-card {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .option-card {
+        width: calc(50% - 20px);
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .user-profile {
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .option-card {
+        width: 100%;
+    }
+
+    .user-profile h6 {
+        font-size: 12px;
+    }
+
+    .user-profile button {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+}
+
+
+.highlights {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+    padding: 20px 10px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.highlight-item {
+    flex: 0 0 auto;
+    text-align: center;
+    min-width: 120px;
+}
+
+.highlight-item img {
+    width: 40px;
+    margin-bottom: 6px;
+}
+
+.highlight-item strong {
+    font-size: 14px;
+    color: #007bff;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.highlight-item p {
+    font-size: 12px;
+    margin: 0;
+    color: #555;
+}
+
+.benefits {
+    padding: 60px 20px;
+    background-color: #ffffff;
+  }
+  
+  .benefits h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #1f3b87;
+  }
+  
+  .benefits p {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .benefit-item {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .benefit-item img {
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+
+  .how-it-works {
+    padding: 60px 20px;
+    background-color: #f6fafd;
+  }
+  
+  .how-it-works h2 {
+    color: #1f3b87;
+  }
+  
+  .work-item img {
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .work-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .work-item p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f3b87;
+    color: white;
+    font-size: 14px;
+    margin-top: 40px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .highlights {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+  
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .insurance-options .option-card {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 992px) {
+    .insurance-options .option-card {
+        width: calc(50% - 20px);
+    }
+
+    .benefits-content .benefit-item,
+    .how-it-works-content .how-it-works-item {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header .logo {
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .user-profile {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-profile h6 {
+        margin-bottom: 10px;
+    }
+
+    .insurance-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .insurance-options .option-card {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .benefits-content,
+    .how-it-works-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .benefits-content .benefit-item,
+    .how-it-works-content .how-it-works-item {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    .logo img {
+        width: 140px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .user-profile button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .insurance-options {
+        padding: 20px 10px;
+    }
+
+    .insurance-options .option-card {
+        padding: 15px;
+    }
+
+    .option-card h3 {
+        font-size: 18px;
+    }
+
+    .option-card p {
+        font-size: 12px;
+    }
+
+    .highlights {
+        padding: 10px 10px;
+    }
+
+    .highlights .highlight-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .highlights .highlight-item strong {
+        font-size: 18px;
+    }
+
+    .highlights .highlight-item p {
+        font-size: 14px;
+    }
+}

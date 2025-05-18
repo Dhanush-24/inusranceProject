@@ -1,0 +1,101 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.thank-you-modal {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+}
+
+.checkmark-circle {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: #28a745;
+  color: white;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* Sidebar container */
+.filter-sidebar {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  position: sticky;
+  top: 0;
+}
+
+/* Section titles like "City", "Expertise" */
+.filter-sidebar .section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Each filter option (checkbox or radio) */
+.filter-sidebar .form-check {
+  margin-bottom: 8px;
+}
+
+.filter-sidebar .form-check-label {
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.filter-sidebar .form-check-input {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* Clear All button */
+.filter-sidebar .btn-link {
+  font-size: 14px;
+  color: #dc3545;
+  text-decoration: none;
+}
+
+.filter-sidebar .btn-link:hover {
+  text-decoration: underline;
+  color: #a71d2a;
+}
+
+/* Make it scrollable if content overflows */
+@media (min-width: 768px) {
+  .filter-sidebar {
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+}

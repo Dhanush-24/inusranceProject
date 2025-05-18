@@ -1,0 +1,146 @@
+[
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Tax Benefits of Investment Insurance Plans",
+      "author": "Aarti Menon",
+      "date": "2025-04-25",
+      "description": "Investment insurance plans offer substantial tax savings under various sections of the Income Tax Act, making them attractive for salaried individuals.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Small_TDS_Rates_Chart_Plan_Your_Investments_Wisely_d55069cc24.webp",
+      "category": "Tax Saving",
+      "heading1": "What Are Tax-Saving Plans?",
+      "content1": "Investment insurance plans such as ULIPs, endowment policies, and guaranteed return plans help save taxes under Section 80C by allowing deductions on premiums paid. Additionally, returns received on maturity are tax-free under Section 10(10D), provided certain conditions are met.",
+      "heading2": "What Do They Cover?",
+      "content2": "These plans offer life cover, investment returns, and tax savings. In the event of death, the nominee receives the sum assured or fund value. Tax exemptions apply on both premium payment and maturity benefits.",
+      "heading3": "Who Should Consider These?",
+      "content3": "Working professionals, especially those in higher tax brackets, can benefit from such plans. It suits individuals looking to grow wealth over time while optimizing their annual tax outgo."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Endowment Policies: Safe Investment with Insurance",
+      "author": "Rohan Shah",
+      "date": "2025-04-15",
+      "description": "Endowment policies offer guaranteed returns on maturity along with life insurance coverage, making them a dual-benefit tool.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Small_13_Ways_to_Start_Your_Investment_6ab852137b.webp",
+      "category": "Endowment",
+      "heading1": "What is an Endowment Policy?",
+      "content1": "An endowment policy is a traditional life insurance plan that pays out a lump sum on maturity or death, whichever comes first. It is ideal for those seeking savings discipline and a fixed financial goal like education or home purchase.",
+      "heading2": "What Does It Offer?",
+      "content2": "Endowment plans offer life cover, maturity benefits, and sometimes bonuses. Bonuses such as reversionary or terminal bonuses can enhance maturity payout. The policy ensures that the nominee is protected financially in case of untimely demise.",
+      "heading3": "Who Should Buy It?",
+      "content3": "People who prefer safe and disciplined savings without exposure to market risk can consider endowment plans. It is suitable for conservative investors planning medium-term financial goals."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Retirement Investment Plans with Life Cover",
+      "author": "Kavita Nair",
+      "date": "2025-04-10",
+      "description": "Pension-cum-insurance plans help build a retirement corpus while ensuring the policyholder’s life is secured during the accumulation phase.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Small_How_to_Raise_EPF_related_Complaints_or_Grievance_on_EPFO_Portal_41870ab3c9.webp",
+      "category": "Retirement",
+      "heading1": "What Are Retirement Investment Plans?",
+      "content1": "These are long-term plans that allow investors to accumulate savings till retirement, with a life insurance component to protect dependents. Upon retirement, the corpus is used to generate a pension or annuity income.",
+      "heading2": "Coverage Details",
+      "content2": "These plans offer guaranteed vesting benefits and life cover. Some policies include a death benefit during the accumulation phase and offer annuity purchase options post-retirement.",
+      "heading3": "Who Should Opt In?",
+      "content3": "Individuals in their 30s and 40s planning for financial independence after retirement should consider these. It suits salaried professionals and business owners wanting to create a regular income stream post-retirement."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Wealth Plans: Grow Your Capital with Security",
+      "author": "Ajay Kumar",
+      "date": "2025-04-01",
+      "description": "Wealth insurance plans offer capital appreciation over the long term through investment-linked options with life coverage.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Small_Section_194_DA_TDS_Rates_Procedure_Exemption_and_Deductions_4c5404db2d.webp",
+      "category": "Wealth",
+      "heading1": "What Are Wealth Plans?",
+      "content1": "Wealth plans are high-return investment insurance policies where premiums are invested in equity and debt markets to generate wealth. These plans come with fund-switching and premium top-up options.",
+      "heading2": "What’s Included?",
+      "content2": "They include life insurance, market-linked returns, and tax savings. The nominee gets the higher of fund value or sum assured in case of death. Policyholders can also enjoy loyalty additions.",
+      "heading3": "Ideal Buyers",
+      "content3": "These plans are suitable for high-income individuals or young investors with a long-term horizon looking for high-growth investment options while securing their families."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Monthly Income Investment Plans",
+      "author": "Simran Desai",
+      "date": "2025-03-25",
+      "description": "Monthly income plans provide regular payouts post a lock-in period along with life cover, ensuring liquidity and protection.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_Effective_Salary_Slip_Format_Your_Guide_to_a_Professional_Pay_Statement_20c4827886.png",
+      "category": "Income Plan",
+      "heading1": "What Are Monthly Income Plans?",
+      "content1": "These plans offer life cover along with monthly income payouts after the policy’s accumulation phase. Ideal for those who want regular supplementary income with guaranteed benefits.",
+      "heading2": "What It Covers",
+      "content2": "Death benefits, maturity payout, and monthly guaranteed income. Some plans also provide bonuses or loyalty additions and include optional riders.",
+      "heading3": "Best For Whom?",
+      "content3": "Best suited for retirees, housewives, or individuals looking for a stable income after a specific period. It helps manage recurring expenses post-retirement or in case of emergencies."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Short-Term Investment Insurance Plans",
+      "author": "Tina Kapoor",
+      "date": "2025-03-15",
+      "description": "Short-term plans combine low tenure with guaranteed returns and life insurance, ideal for quick savings goals.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_EPF_Claim_Status_Inquiry_A_User_Friendly_Guide_fc0930c812.png",
+      "category": "Short-Term",
+      "heading1": "What Is a Short-Term Plan?",
+      "content1": "These are insurance plans with a tenure of 5 years or less that offer guaranteed returns on maturity. They ensure life protection while helping build a small savings corpus.",
+      "heading2": "Coverage Overview",
+      "content2": "The plan includes death benefits, fixed maturity payout, and sometimes tax-saving benefits. Returns are not market-linked, providing safety and predictability.",
+      "heading3": "Who Should Choose It?",
+      "content3": "New investors, young earners saving for small goals like vacations, or people looking to park money safely for 3–5 years can opt for this."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Market-Linked vs. Traditional Plans: A Comparison",
+      "author": "Vikas Mehra",
+      "date": "2025-03-10",
+      "description": "Explore the pros and cons of market-linked ULIPs and traditional endowment or guaranteed plans to make informed choices.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_Form_26_AS_Your_Ultimate_Guide_to_Income_Tax_Statement_152734f235.png",
+      "category": "Comparison",
+      "heading1": "Understanding the Difference",
+      "content1": "Market-linked plans invest in equity or debt markets and offer high potential returns, while traditional plans provide fixed benefits and low risk. The choice depends on your financial goals and risk appetite.",
+      "heading2": "What’s Offered in Each?",
+      "content2": "ULIPs offer fund switches, growth potential, and flexibility. Traditional plans offer guaranteed returns, bonuses, and stable growth. Both include life insurance and tax benefits.",
+      "heading3": "Which to Pick?",
+      "content3": "If you are young with a high-risk appetite, ULIPs are ideal. For conservative investors or those nearing retirement, traditional plans offer better security."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Critical Illness Riders in Investment Plans",
+      "author": "Poonam Yadav",
+      "date": "2025-02-28",
+      "description": "Add-on riders like critical illness provide extra security to investment insurance plans, covering unforeseen medical emergencies.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_Understanding_TDS_Refunds_c9c311c436.png",
+      "category": "Rider",
+      "heading1": "What Are Critical Illness Riders?",
+      "content1": "These are optional add-ons that offer a lump sum payout on diagnosis of major illnesses like cancer, heart disease, or stroke. They enhance the protection value of your policy.",
+      "heading2": "Coverage Details",
+      "content2": "The rider pays a predefined sum upon diagnosis of listed critical illnesses, regardless of actual medical expenses. Some plans may waive future premiums as part of the rider.",
+      "heading3": "Who Needs This?",
+      "content3": "Anyone with a family history of illness or the sole breadwinner should consider this rider. It helps avoid draining investment corpus due to high medical costs."
+    }
+  },
+  {
+    "InvestmentInsuranceInformation": {
+      "title": "Investment Plans for NRIs",
+      "author": "Deepak Patel",
+      "date": "2025-02-20",
+      "description": "Many Indian investment insurance plans are open to NRIs, helping them maintain financial roots in India with tax benefits.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Solvency_Ratio_copy_7_100_d17b49bc0c.jpg",
+      "category": "NRI",
+      "heading1": "What Are NRI Investment Plans?",
+      "content1": "These are insurance-cum-investment products specifically designed for Non-Resident Indians to invest in India. Plans range from ULIPs to guaranteed return products.",
+      "heading2": "What’s Covered?",
+      "content2": "NRIs get life cover, maturity benefits, and tax savings. Premiums can often be paid through NRE/NRO accounts, and maturity proceeds may be repatriable based on RBI rules.",
+      "heading3": "Who Can Opt?",
+      "content3": "Any Indian living abroad looking to invest in rupee-denominated assets or planning for family security back home can opt for these plans."
+    }
+  }
+]

@@ -1,0 +1,204 @@
+[
+  {
+    "HealthInsuranceInformation": {
+      "title": "Understanding Critical Illness Health Insurance",
+      "author": "Dr. Anil Reddy",
+      "date": "2025-05-13",
+      "description": "Critical illness plans offer lump-sum benefits upon diagnosis of severe diseases like cancer, heart attack, and kidney failure.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_How_Corporate_Health_Insurance_Benefits_Employees_and_Employers_a52a9f6560.png",
+      "category": "Critical Illness",
+      "heading1": "What is Critical Illness Insurance?",
+      "content1": "This is a type of health insurance that pays a fixed lump-sum amount upon diagnosis of specific life-threatening conditions. Unlike regular health plans, it’s not linked to hospitalization bills. The payout helps manage treatment, travel, and household expenses during recovery.",
+      "heading2": "Diseases Covered",
+      "content2": "Policies usually cover cancer, heart attack, stroke, kidney failure, and multiple organ failure. Some plans may include paralysis, coma, and major surgeries. It's important to read the list of covered conditions before buying.",
+      "heading3": "Who Should Buy?",
+      "content3": "People with family history of critical illness or high-stress jobs should consider it. Also suitable for breadwinners who want income protection during recovery. Even those with existing health plans can benefit by adding this as a supplement.",
+      "heading4": "Claim Process",
+      "content4": "Submit diagnosis proof from a certified medical professional. Once verified, the lump sum is credited to your account. The payout can be used however you choose — medical or personal expenses.",
+      "heading5": "Exclusions to Note",
+      "content5": "Claims for pre-existing critical conditions or diagnosis within waiting period are excluded. Self-inflicted injuries, non-disclosure of history, or diagnosis outside India may also lead to claim denial."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Role of Network Hospitals in Health Insurance",
+      "author": "Neha Tripathi",
+      "date": "2025-04-22",
+      "description": "Network hospitals are partnered healthcare providers where you can avail cashless treatment. Know their importance.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_How_Super_Top_Up_Health_Insurance_Works_c6dead837c.png",
+      "category": "Hospital Network",
+      "heading1": "What are Network Hospitals?",
+      "content1": "These are hospitals that have tie-ups with your health insurer to provide cashless treatment. You don’t need to pay upfront; the insurer settles directly with the hospital. It reduces paperwork and stress during emergencies.",
+      "heading2": "Benefits of Choosing Network Hospitals",
+      "content2": "You can avail planned or emergency treatments without arranging money immediately. It simplifies the claim process and minimizes the chances of rejection. They often offer better service for insured patients.",
+      "heading3": "Finding Network Hospitals",
+      "content3": "Check your insurer’s website or mobile app to find the nearest network hospitals. Some insurers offer tools with filters by city, specialization, or rating. Always confirm tie-ups before admission.",
+      "heading4": "Cashless Claim Process",
+      "content4": "Fill pre-authorization forms at the hospital’s TPA desk. Submit your health card and policy details. The insurer typically approves within a few hours.",
+      "heading5": "Limitations and Precautions",
+      "content5": "Non-network hospitals won’t provide cashless service; you'll need to pay and claim reimbursement. Ensure your planned treatment is covered to avoid surprises."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Importance of Health Insurance for Senior Citizens",
+      "author": "Vishal Mehra",
+      "date": "2025-04-18",
+      "description": "Senior citizen health plans cater to medical needs of the elderly. Learn about benefits, features, and eligibility.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_What_Are_the_Eligible_Expenses_for_Preventive_Health_Checkups_Under_Section_80_D_7092a2833e.png",
+      "category": "Senior Health Plans",
+      "heading1": "Why Seniors Need Special Plans",
+      "content1": "With age, health risks increase, and treatment costs rise. Dedicated senior citizen policies offer high cover for age-related conditions. They ensure peace of mind and quick access to medical facilities.",
+      "heading2": "Features of Senior Plans",
+      "content2": "High entry age limits, coverage for chronic diseases, and daycare procedures. Many plans include domiciliary hospitalization and home care support.",
+      "heading3": "Premium Considerations",
+      "content3": "Premiums are higher due to elevated risk. Opt for policies that provide lifetime renewability and no-claim bonus to balance costs.",
+      "heading4": "Health Check Requirements",
+      "content4": "Most policies require pre-policy medical checkups. Insurers may co-pay part of the treatment cost depending on age and health condition.",
+      "heading5": "Top Plan Benefits",
+      "content5": "Covers treatments like cataract, knee replacement, cardiac care, and more. Also includes annual health checkups and wellness support."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Co-payment in Health Insurance: What You Must Know",
+      "author": "Ritu Mathur",
+      "date": "2025-04-08",
+      "description": "Co-payment can affect how much you pay from your pocket during a claim. Understand how it works.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_How_to_Apply_for_Government_Health_Insurance_in_India_141636b22a.png",
+      "category": "Cost Sharing",
+      "heading1": "What is Co-payment?",
+      "content1": "It’s the fixed percentage of claim amount that the policyholder must bear. For example, if co-pay is 20%, you pay ₹20,000 for a ₹1 lakh bill. It reduces insurer liability.",
+      "heading2": "When is it Applied?",
+      "content2": "Usually applicable to senior citizen plans or treatment in non-network hospitals. It’s also used when insured person chooses a higher class of room.",
+      "heading3": "Impact on Premium",
+      "content3": "Policies with co-payment usually have lower premiums. But at claim time, your out-of-pocket expense can be significant. Balance savings vs future costs wisely.",
+      "heading4": "How to Avoid Co-pay?",
+      "content4": "Choose plans without co-payment clause or pay a higher premium to eliminate it. Some insurers allow customizations.",
+      "heading5": "Is it Worth It?",
+      "content5": "If you’re healthy or want a lower premium, co-pay plans may work. But for those with ongoing treatments, full-cover plans are safer."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Restoration Benefit in Health Insurance",
+      "author": "Rakesh Iyer",
+      "date": "2025-03-28",
+      "description": "Restoration benefit ensures sum insured is refilled after it is exhausted. A crucial feature in family floater plans.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_Top_Benefits_of_the_PM_Modi_Health_Insurance_b3aa7f0cff.png",
+      "category": "Advanced Features",
+      "heading1": "What is Restoration Benefit?",
+      "content1": "It automatically restores the full sum insured once it is exhausted in a policy year. Useful for multiple hospitalizations within the same year.",
+      "heading2": "Types of Restoration",
+      "content2": "Partial (used when entire sum is exhausted) and Complete (used even for partial exhaustion). Some plans restore only for different illnesses.",
+      "heading3": "Who Needs It?",
+      "content3": "Highly recommended for family floater policies where more than one member may be hospitalized. Also valuable for critical illness plans.",
+      "heading4": "Premium Impact",
+      "content4": "Adds a small cost to your premium but provides significant value during claim time. Especially helpful in back-to-back treatments.",
+      "heading5": "Read the Fine Print",
+      "content5": "Some policies allow restoration only once per year. Others may restrict it to unrelated claims. Always check terms before buying."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Daycare Procedures in Health Insurance Explained",
+      "author": "Sanjana Nair",
+      "date": "2025-03-15",
+      "description": "Many modern treatments don't need 24-hour hospitalization. Daycare coverage ensures these are also reimbursed.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_What_is_IRDAI_Health_Insurance_Role_of_IRDAI_in_Regulating_Health_Policies_e107e041b4.png",
+      "category": "Treatment Coverage",
+      "heading1": "What are Daycare Procedures?",
+      "content1": "These are medical procedures or surgeries that require less than 24 hours of hospitalization due to advanced technology. Common examples include cataract surgery, dialysis, chemotherapy, and tonsillectomy.",
+      "heading2": "Why They Matter",
+      "content2": "Earlier, such procedures were excluded from health plans because of the 24-hour rule. Now, most insurers cover 500+ daycare treatments, ensuring modern healthcare doesn’t go uncovered.",
+      "heading3": "Common Examples",
+      "content3": "Besides cataract and dialysis, daycare procedures include lithotripsy, angiography, sinus surgery, and endoscopy. A full list is usually available in the policy document.",
+      "heading4": "How to Claim",
+      "content4": "Get admission and discharge notes from the hospital. Submit the documents under normal claim procedure. For cashless claims, choose a network hospital.",
+      "heading5": "Check Your Policy",
+      "content5": "Not all policies cover every daycare procedure. Go through the exclusions section and ask the insurer for a list of covered treatments."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Health Insurance for People with Pre-Existing Diseases",
+      "author": "Dr. Alok Sinha",
+      "date": "2025-04-05",
+      "description": "People with diabetes, BP, or thyroid can still get health insurance. Here’s how to approach it.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_How_to_Choose_the_Best_Cashless_Health_Insurance_Plan_in_2025_91d2827492.png",
+      "category": "Special Cases",
+      "heading1": "What is a Pre-Existing Disease?",
+      "content1": "Any medical condition that the applicant had before buying insurance is a pre-existing disease. Common ones include diabetes, hypertension, thyroid disorders, and asthma.",
+      "heading2": "Waiting Periods Apply",
+      "content2": "Most policies have a waiting period of 2–4 years for pre-existing conditions. During this time, claims related to those conditions are not accepted.",
+      "heading3": "Disclose Honestly",
+      "content3": "Always declare your health status while buying a policy. Non-disclosure may lead to claim rejection later.",
+      "heading4": "Tips to Get Covered",
+      "content4": "Opt for insurers that offer early PED coverage or reduce waiting with top-up plans. Some specialized insurers offer plans tailored for such conditions.",
+      "heading5": "Medical Tests & Premiums",
+      "content5": "Applicants may need to undergo medical tests, and premiums can be slightly higher. But it’s worth the protection it brings in the long run."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "No-Claim Bonus in Health Insurance: What You Gain",
+      "author": "Ishaan Roy",
+      "date": "2025-03-05",
+      "description": "NCB rewards you with a higher sum insured or premium discount when you don’t file a claim.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_What_Is_the_NDHM_Health_Card_and_How_to_Apply_42ff5e5cee.png",
+      "category": "Bonuses & Rewards",
+      "heading1": "What is No-Claim Bonus?",
+      "content1": "NCB is a benefit given by insurers for not making any claim in a policy year. It can increase your sum insured (e.g., by 10% each year) or offer a discount on renewal premium.",
+      "heading2": "How it Works",
+      "content2": "For every claim-free year, your NCB grows. If you don’t file a claim for 5 years, your cover can grow significantly. But a single claim may reset the bonus.",
+      "heading3": "Types of NCB",
+      "content3": "Cumulative bonus (increase in sum insured) and discount bonus (cut in premium). Some plans offer both combined.",
+      "heading4": "Impact on Renewal",
+      "content4": "NCB is applied during policy renewal. Always ask your insurer how much NCB you’ve earned before renewing.",
+      "heading5": "Things to Remember",
+      "content5": "NCB is not transferable between insurers unless you port the policy. Also, claims for small amounts might cost you the bonus – weigh it before filing."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "How Health Insurance Supports Telemedicine Consultations",
+      "author": "Dr. Sweta Nandan",
+      "date": "2025-04-20",
+      "description": "Many insurers now cover telemedicine as part of OPD and post-COVID innovations. Learn how it works.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_Tax_Benefits_on_Medical_Expenditure_for_Senior_Citizen_Parents_Under_Section_80_D_b95c1224e0.png",
+      "category": "Digital Health",
+      "heading1": "What is Telemedicine?",
+      "content1": "Telemedicine lets you consult doctors online via video, call, or chat without visiting a clinic. It gained popularity post-COVID and is especially useful for follow-ups and minor illnesses.",
+      "heading2": "Insurance Coverage",
+      "content2": "Many modern health insurance policies now cover teleconsultations under OPD benefits. Some even offer free video calls with empaneled doctors.",
+      "heading3": "Why It’s Important",
+      "content3": "Reduces cost and time, especially for elderly or rural patients. It allows faster second opinions and early treatment from the comfort of home.",
+      "heading4": "How to Avail",
+      "content4": "Use the insurer’s portal or tie-up apps to book a consultation. Save prescriptions and chat logs for reimbursement if needed.",
+      "heading5": "Limitations",
+      "content5": "Not valid for emergencies or surgeries. Some insurers cap the number of sessions or reimbursement per consultation."
+    }
+  },
+  {
+    "HealthInsuranceInformation": {
+      "title": "Understanding Sub-Limits in Health Insurance Policies",
+      "author": "Karan Deshmukh",
+      "date": "2025-04-10",
+      "description": "Sub-limits cap the amount payable for specific treatments or services. Know how to avoid surprises.",
+      "imageUrl": "https://staticimg.insurancedekho.com/strapi/Big_What_Is_Outpatient_Care_A_Detailed_Explanation_27e98900e5.png",
+      "category": "Policy Terms",
+      "heading1": "What are Sub-Limits?",
+      "content1": "Sub-limits are caps placed on room rent, specific surgeries, or medical procedures regardless of your total sum insured. For example, room rent capped at 1% of sum insured per day.",
+      "heading2": "Common Sub-Limits",
+      "content2": "Most policies have limits on room rent, ICU charges, cataract surgery, or maternity. These limits help insurers manage risk but reduce your actual coverage.",
+      "heading3": "How it Affects Claims",
+      "content3": "Even if your total sum insured is ₹5 lakh, you might get only ₹25,000 for a cataract surgery if there's a sub-limit. This results in higher out-of-pocket expenses.",
+      "heading4": "Avoiding Sub-Limits",
+      "content4": "Choose plans with no sub-limits or higher cap values. They may cost slightly more but ensure better claim payouts.",
+      "heading5": "Important Tip",
+      "content5": "Always read the policy document carefully. Ask your agent or insurer about any hidden sub-limits before purchase."
+    }
+  }
+
+
+]
