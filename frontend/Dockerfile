@@ -17,7 +17,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Copy custom Nginx config (create this file in your project root)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

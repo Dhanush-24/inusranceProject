@@ -1,50 +1,30 @@
 version: '3.8'
-
 services:
   frontend:
-    container_name: frontend-container
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
-      - REACT_APP_API_BASE_URL=http://${PUBLIC_IP_HOST_MACHINE}:5001
+      - REACT_APP_API_BASE_URL=http://${PUBLIC_IP_HOST_MACHINE}:5000
     depends_on:
       - backend
-    networks:
-      - mern-network
-    restart: always
-
+    
   backend:
-    container_name: backend-container
     build: ./backend
     ports:
-      - "5001:5001"
+      - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo-container:27017/insuranceDekho
-      - JWT_SECRET=abcde123  
-      - PORT=5001
+      - MONGO_URI=${MONGO_URL}
+      - JWT_SECRET=${JWT_SECRET}  
     depends_on:
       - mongo
-    networks:
-      - mern-network
-    restart: always
-
   mongo:
     image: mongo
-    container_name: mongo-container
-    environment: 
-      MONGO_INITDB_DATABASE: insuranceDekho
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    networks:
-      - mern-network
-    restart: always
-
+    
 volumes:
   mongo-data:
 
-networks:
-  mern-network:
-    driver: bridge
