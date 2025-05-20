@@ -51,25 +51,46 @@ const BikeQuote = () => {
   }, [plans, bikeNumber]);
 
   const handleSelectPolicy = async (planId) => {
+    if (!bikeNumber || !planId) {
+      setMessage({
+        type: "danger",
+        text: "Missing bike number or plan ID.",
+      });
+      return;
+    }
+
     setLoadingPlanId(planId);
     setMessage(null);
+
+    console.log("Selecting plan with:", { bikeNumber, planId });
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/bike/selectplan`, {
-        bikeNumber,
-        planId,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/bike/selectplan`,
+        { bikeNumber, planId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${yourTokenIfRequired}`, // Uncomment if needed
+          },
+        }
+      );
 
       setMessage({
         type: "success",
         text: response.data.message || "Policy selected successfully.",
       });
 
-      // ❌ Remove navigation unless you want to redirect to user dashboard
-    //   navigate("/user-dashboard", { state: { bikeNumber } });
-      console.log(planId)
+      // Optional: Navigate to another page
+      // navigate("/user-dashboard", { state: { bikeNumber } });
 
     } catch (error) {
-      console.error("Error selecting policy:", error);
+      console.error("Error selecting policy:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
+
       setMessage({
         type: "danger",
         text:
@@ -94,30 +115,32 @@ const BikeQuote = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <>
       <Navbar />
-      <h2 className="text-center mb-4">Available Bike Insurance Plans</h2>
+      <div className="container mt-5">
+        <h2 className="text-center mb-4">Available Bike Insurance Plans</h2>
 
-      {message && (
-        <Alert variant={message.type} onClose={() => setMessage(null)} dismissible>
-          {message.text}
-        </Alert>
-      )}
+        {message && (
+          <Alert variant={message.type} onClose={() => setMessage(null)} dismissible>
+            {message.text}
+          </Alert>
+        )}
 
-      {loading && (
-        <div className="text-center my-5">
-          <Spinner animation="border" variant="primary" />
-          <p>Loading plans...</p>
-        </div>
-      )}
+        {loading && (
+          <div className="text-center my-5">
+            <Spinner animation="border" variant="primary" />
+            <p>Loading plans...</p>
+          </div>
+        )}
 
-      {!loading && plans.length === 0 && (
-        <Alert variant="warning">No plans available for your bike.</Alert>
-      )}
+        {!loading && plans.length === 0 && (
+          <Alert variant="warning">No plans available for your bike.</Alert>
+        )}
 
-      {plans.map((plan) => (
+        {plans.map((plan) => (
         <Card className="mb-4 p-3 shadow" key={plan.planId || plan._id}>
           <Row className="align-items-center">
+            {/* Image on left */}
             <Col md={3} className="text-center">
               <img
                 src={plan.logoUrl}
@@ -125,24 +148,38 @@ const BikeQuote = () => {
                 style={{ maxHeight: "100px", objectFit: "contain" }}
               />
             </Col>
+
+            {/* Middle column with info */}
             <Col md={6}>
-              <h5>{plan.planName}</h5>
-              <p><strong>Provider:</strong> {plan.provider}</p>
-              <p><strong>Coverage:</strong> {plan.coverage}</p>
-              <p><strong>Premium:</strong> ₹{plan.annualPremium}</p>
-              <p><strong>Eligibility:</strong> {plan.eligibility}</p>
-              {Array.isArray(plan.specialBenefits) && (
-                <>
-                  <p><strong>Special Benefits:</strong></p>
-                  <ul>
+              <h5 className="mb-2">{plan.planName || plan.insurerName}</h5>
+
+              <div
+                className="d-flex flex-column gap-1"
+                style={{ fontSize: "0.9rem", color: "#555" }}
+              >
+                <div><strong>Provider:</strong> {plan.provider || "N/A"}</div>
+                <div><strong>Coverage:</strong> {plan.coverage || "N/A"}</div>
+                <div><strong>Eligibility:</strong> {plan.eligibility || "N/A"}</div>
+              </div>
+
+              {Array.isArray(plan.specialBenefits) && plan.specialBenefits.length > 0 && (
+                <div className="text-success small mt-2">
+                  <strong>Key Features:</strong>
+                  <ul className="mb-0 list-unstyled">
                     {plan.specialBenefits.map((benefit, idx) => (
-                      <li key={idx}>{benefit}</li>
+                      <li key={idx}>✔ {benefit}</li>
                     ))}
                   </ul>
-                </>
+                </div>
               )}
             </Col>
+
+            {/* Right column with premium and button */}
             <Col md={3} className="text-center">
+              <p className="mb-2">
+                <strong>Starting From ₹{plan.annualPremium || plan.premiumAmount}</strong>
+              </p>
+
               <Button
                 variant="primary"
                 size="lg"
@@ -162,9 +199,12 @@ const BikeQuote = () => {
             </Col>
           </Row>
         </Card>
-      ))}
+
+
+        ))}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -154,16 +154,22 @@ const BikeInsuranceCard = () => {
                     </Col>
                     <Col md={7}>
                       <h5 className="mb-2 fw-bold">{plan.planName}</h5>
-                      <p className="mb-1"><strong>Coverage:</strong> {plan.coverage}</p>
-                      <p className="mb-1"><strong>Plan Type:</strong> {plan.planType}</p>
-                      <p className="mb-0"><strong>Claim Ratio:</strong> {plan.claimRatio || "N/A"}</p>
+                      <div className="d-flex flex-column gap-1 text-muted small">
+                        <div><strong>Coverage:</strong> {plan.coverage}</div>
+                        <div><strong>Plan Type:</strong> {plan.planType}</div>
+                        <div><strong>Claim Ratio:</strong> {plan.claimRatio || "N/A"}</div>
+                      </div>
                     </Col>
-                    <Col md={3} className="text-end">
-                      <h5 className="text-primary fw-bold mb-3">Premium:₹{plan.annualPremium}</h5>
-                      <Button variant="danger" className="w-100" onClick={() => startFlow(plan)}>
+
+                    <Col md={3} className="text-md-end text-center">
+                      <h5 className="text-danger fw-bold mb-2">
+                        Premium: ₹{plan.annualPremium}
+                      </h5>
+                      <Button variant="danger" className="w-100 mt-2" onClick={() => startFlow(plan)}>
                         Check Prices
                       </Button>
                     </Col>
+
                   </Row>
                 </Card>
               </Col>

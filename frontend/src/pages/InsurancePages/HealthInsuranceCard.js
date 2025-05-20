@@ -127,7 +127,7 @@ const HealthInsuranceCard = () => {
                         <h5 className="mb-1">{plan.company} - {plan.plan}</h5>
                         <div className="text-muted small">
                           <div>Sum Insured: ₹{plan.sumInsured}</div>
-                          <div>Premium: ₹{plan.premiumAmount}</div>
+                          <div>Premium: {plan.premiumAmount}</div>
                         </div>
                       </div>
                     </div>

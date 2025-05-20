@@ -178,10 +178,10 @@ exports.createBikePolicy = async (req, res, next) => {
 
 exports.selectPlan = async (req, res) => {
   try {
-    const { bikeNumber, bikeBrand, bikeModel, registrationYear, registrationCity, userInfo, previousPolicy, planId } = req.body;
+    const { bikeNumber, planId } = req.body;
 
-    if (!planId) {
-      return res.status(400).json({ message: "Plan ID is required" });
+    if (!planId || !bikeNumber) {
+      return res.status(400).json({ message: "Both bikeNumber and planId are required" });
     }
 
     // Fetch available bike policies (plans) from your database
@@ -194,37 +194,25 @@ exports.selectPlan = async (req, res) => {
 
     let bikePolicy = await BikePolicy.findOne({ bikeNumber });
 
+    const planDetails = {
+      planId: selectedPlan.planId,
+      planName: selectedPlan.planName,
+      planType: selectedPlan.planType,
+      coverage: selectedPlan.coverage,
+      annualPremium: selectedPlan.annualPremium,
+      provider: selectedPlan.provider,
+      eligibility: selectedPlan.eligibility
+    };
+
     if (!bikePolicy) {
-      // Create a new policy if it doesn't exist
+      // Create a new bike policy record if it doesn't exist
       bikePolicy = new BikePolicy({
-        userInfo,
-        previousPolicy,
         bikeNumber,
-        bikeBrand,
-        bikeModel,
-        registrationYear,
-        registrationCity,
-        planDetails: {
-          planId: selectedPlan.planId,
-          planName: selectedPlan.planName,
-          planType: selectedPlan.planType,
-          coverage: selectedPlan.coverage,
-          annualPremium: selectedPlan.annualPremium,
-          provider: selectedPlan.provider,
-          eligibility: selectedPlan.eligibility
-        }
+        planDetails
       });
     } else {
-      // Update the existing policy with the selected plan details
-      bikePolicy.planDetails = {
-        planId: selectedPlan.planId,
-        planName: selectedPlan.planName,
-        planType: selectedPlan.planType,
-        coverage: selectedPlan.coverage,
-        annualPremium: selectedPlan.annualPremium,
-        provider: selectedPlan.provider,
-        eligibility: selectedPlan.eligibility
-      };
+      // Update existing bike policy with selected plan
+      bikePolicy.planDetails = planDetails;
     }
 
     await bikePolicy.save();

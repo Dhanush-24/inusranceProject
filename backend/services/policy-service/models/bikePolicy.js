@@ -7,7 +7,7 @@ const BikePolicySchema = new mongoose.Schema({
     trim: true,
     validate: {
       validator: function(value) {
-        return /^[A-Z]{2}-\d{2}-\d{4}$/.test(value);;
+        return /^[A-Z]{2}-\d{2}-\d{4}$/i.test(value);;
       },
       message: 'Invalid car number format. Example format: "XX 1234"',
     },

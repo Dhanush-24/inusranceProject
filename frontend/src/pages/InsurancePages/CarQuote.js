@@ -127,24 +127,28 @@ const CarQuote = () => {
               />
             </Col>
             <Col md={6}>
-              <h5>{plan.policyName}</h5>
-              <p><strong>Insurer:</strong> {plan.insurerName}</p>
-              <p><strong>IDV Value:</strong> ₹{plan.idvValue}</p>
-              <p><strong>Premium:</strong> ₹{plan.premiumAmount}</p>
-              <p><strong>Claim Ratio:</strong> {plan.claimSettlementRatio}</p>
-              <p><strong>Cashless Garages:</strong> {plan.cashlessGarages}</p>
-              {Array.isArray(plan.specialBenefits) && (
-                <>
-                  <p><strong>Special Benefits:</strong></p>
-                  <ul>
+              <h5 className="mb-2">{plan.insurerName}</h5>
+              <div className="d-flex flex-column gap-1" style={{ fontSize: "0.9rem", color: "#555" }}>
+                <div><strong>Cashless Garages:</strong> {plan.cashlessGarages}</div>
+                <div><strong>Claims Settled:</strong> {plan.claimSettlementRatio}</div>
+                <div><strong>Coverage:</strong> comes under <strong>{plan.insurerName}</strong></div>
+              </div>
+
+              {Array.isArray(plan.specialBenefits) && plan.specialBenefits.length > 0 && (
+                <div className="text-success small mt-2">
+                  <strong>Key Features:</strong>
+                  <ul className="mb-0 list-unstyled">
                     {plan.specialBenefits.map((benefit, idx) => (
-                      <li key={idx}>{benefit}</li>
+                      <li key={idx}>✔ {benefit}</li>
                     ))}
                   </ul>
-                </>
+                </div>
               )}
             </Col>
+
             <Col md={3} className="text-center">
+                <p className="mb-2"><strong>Starting From ₹{plan.premiumAmount}</strong></p>
+
               <Button
                 variant="primary"
                 size="lg"

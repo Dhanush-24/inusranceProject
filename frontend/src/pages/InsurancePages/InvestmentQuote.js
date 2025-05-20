@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Button from 'react-bootstrap/Button';
+import { Row, Col, Card, Button } from 'react-bootstrap';
 
 const InvestmentQuote = () => {
   const location = useLocation();
@@ -51,32 +51,52 @@ const InvestmentQuote = () => {
           <p>No plans available at the moment.</p>
         ) : (
           plans.map((plan) => (
-            <div key={plan._id} className="border p-3 mb-4 rounded shadow-sm">
-              <div className="row align-items-center">
-                {plan.logoUrl && (
-                  <div className="col-md-3 text-center">
+            <Card className="mb-4 p-3 shadow" key={plan._id}>
+              <Row className="align-items-center">
+                {/* Logo and Summary */}
+                <Col md={3} className="text-center">
+                  {plan.logoUrl && (
                     <img
                       src={plan.logoUrl}
                       alt="Logo"
-                      style={{ width: '120px', height: '120px', objectFit: 'contain' }}
-                      className="mb-3 mb-md-0"
+                      style={{ maxHeight: '100px', objectFit: 'contain' }}
                     />
+                  )}
+
+                </Col>
+
+                {/* Plan Details */}
+                <Col md={6}>
+                  <h5 className="mb-2">{plan.company} - {plan.planName}</h5>
+                    <div><strong>Premium:</strong> {plan.premium}</div>
+                    <div><strong>Returns:</strong> {plan.returnAmount} ({plan.returnPercentage}%)</div>
+                  {plan.description && <p style={{ fontSize: '0.9rem', color: '#666' }}>{plan.description}</p>}
+                  <div style={{ fontSize: '0.9rem', color: '#555' }}>
+                    {plan.otherBenefits && (
+                      <div className="text-success small mt-2">
+                        <strong>Benefits:</strong>
+                        <ul className="mb-0 list-unstyled">
+                          {plan.otherBenefits.lifeCover && <li>✔ Life Cover Included</li>}
+                          {plan.otherBenefits.taxSaving && <li>✔ Tax Saving Under 80C</li>}
+                        </ul>
+                      </div>
+                    )}
                   </div>
-                )}
-                <div className="col-md-9">
-                  <h5>{plan.company} - {plan.planName}</h5>
-                  <p><strong>Premium:</strong> ₹{plan.premium}</p>
-                  <p><strong>Returns:</strong> ₹{plan.returnAmount} ({plan.returnPercentage}%)</p>
-                  <ul>
-                    {plan.otherBenefits?.lifeCover && <li>Life Cover Included</li>}
-                    {plan.otherBenefits?.taxSaving && <li>Tax Saving Under 80C</li>}
-                  </ul>
-                  <Button variant="success" className="mt-2" onClick={() => handleSelectPlan(plan._id)}>
-                    Select This Plan
+                </Col>
+
+                {/* CTA Button */}
+                <Col md={3} className="text-center">
+                  <Button
+                    variant="success"
+                    size="lg"
+                    className="w-100 mt-2"
+                    onClick={() => handleSelectPlan(plan._id)}
+                  >
+                    Select Plan
                   </Button>
-                </div>
-              </div>
-            </div>
+                </Col>
+              </Row>
+            </Card>
           ))
         )}
       </div>

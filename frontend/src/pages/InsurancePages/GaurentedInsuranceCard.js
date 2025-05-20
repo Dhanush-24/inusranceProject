@@ -25,27 +25,36 @@ const GuaranteedInsuranceCard = () => {
     fetchPlans();
   }, []);
 
-  const handleSelectPlan = async (planId) => {
+  const handleSelectPlan = (planId) => {
     setSelectedPlanId(planId); // Store selected plan ID
     setShowStep(1); // Show the user info modal
   };
 
   const handlePlanSubmit = async () => {
-    if (!selectedPlanId || !formData.name || !formData.mobile) {
+    // Trim inputs to avoid whitespace-only values
+    const name = formData.name.trim();
+    const mobile = formData.mobile.trim();
+
+    if (!selectedPlanId || !name || !mobile) {
       alert('Please fill in all the details.');
       return;
     }
 
     try {
       // Send the user's details along with the selected plan ID
-      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/create`, formData);
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/create`, {
+        ...formData,
+        name,
+        mobile,
+        planId: selectedPlanId,
+      });
 
       // Navigate to the Guaranteed Quote page with user and plan details
       navigate('/guaranteed-quote', {
         state: {
           plans,
-          user: formData,
-          selectedPlanId: selectedPlanId, // Pass the selected plan ID as part of state
+          user: { name, mobile },
+          selectedPlanId,
         },
       });
     } catch (err) {
@@ -70,7 +79,16 @@ const GuaranteedInsuranceCard = () => {
           </div>
           <div className="col-md-4 text-center">
             <div className="card shadow-lg p-4 border-0" style={{ backgroundColor: '#e0f7fa', borderRadius: '20px' }}>
-              <Button variant="primary" size="lg" onClick={() => setShowStep(1)}>
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  if (plans.length > 0) {
+                    setSelectedPlanId(plans[0].planId); // Default to first plan
+                  }
+                  setShowStep(1);
+                }}
+              >
                 Get Guaranteed Insurance
               </Button>
             </div>

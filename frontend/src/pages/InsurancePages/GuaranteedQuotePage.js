@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Navbar from '../../components/Navbar';  // Fixed typo in 'componenets'
-import Footer from '../../components/Footer';  // Fixed typo in 'componenets'
+import { Card, Row, Col, Button, Spinner } from 'react-bootstrap';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import axios from 'axios';
 
 const GuaranteedQuotePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { plans = [], user = {} } = location.state || {};
+  const [loadingPlanId, setLoadingPlanId] = useState(null);
 
   const handleSelectPlan = async (planId) => {
+    setLoadingPlanId(planId);
     try {
       await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/select`, {
         ...user,
@@ -21,6 +23,8 @@ const GuaranteedQuotePage = () => {
     } catch (err) {
       console.error('Error selecting plan:', err);
       alert('Failed to select plan.');
+    } finally {
+      setLoadingPlanId(null);
     }
   };
 
@@ -28,52 +32,93 @@ const GuaranteedQuotePage = () => {
     <>
       <Navbar />
       <div className="container py-5">
-        <h2>Choose a Guaranteed Insurance Plan</h2>
+        <h2 className="mb-4">Choose a Guaranteed Insurance Plan</h2>
+
         {plans.length > 0 ? (
           plans.map((plan) => (
-            <div key={plan.planId} className="border p-3 mb-4 rounded shadow-sm">
-              <div className="d-flex align-items-center">
-                {/* Image Section with more margin and padding */}
-                <div className="me-5">
+            <Card className="mb-4 p-3 shadow" key={plan.planId || plan._id}>
+              <Row className="align-items-center">
+                {/* Logo */}
+                <Col md={3} className="text-center">
                   {plan.logoUrl ? (
                     <img
                       src={plan.logoUrl}
                       alt={`${plan.Company} logo`}
-                      style={{ width: '150px', height: 'auto', objectFit: 'contain' }}
+                      style={{ maxHeight: '100px', objectFit: 'contain' }}
                       onError={(e) => {
-                        e.target.style.display = 'none';  // Hide image if error
-                        console.log('Error loading image for', plan.Company);  // Debugging
+                        e.target.style.display = 'none';
+                        console.log('Error loading image for', plan.Company);
                       }}
                     />
                   ) : (
-                    <p>No logo available</p>
+                    <div
+                      style={{
+                        maxHeight: '100px',
+                        lineHeight: '100px',
+                        backgroundColor: '#f0f0f0',
+                        color: '#888',
+                        fontSize: '0.85rem',
+                      }}
+                    >
+                      No Logo Available
+                    </div>
                   )}
-                </div>
-                {/* Details Section */}
-                <div>
-                  <h5>{plan.Company} - {plan.PlanName}</h5>
-                  <p><strong>Premium:</strong> ₹{plan.PremiumPerYear}</p>
-                  <p><strong>Policy Term:</strong> {plan.PolicyTerm}</p>
-                  <p><strong>Premium Payment Term:</strong> {plan.PremiumPaymentTerm}</p>
-                  {plan.MonthlyIncomeAfterPremiumTerm && (
-                    <p><strong>Monthly Income:</strong> ₹{plan.MonthlyIncomeAfterPremiumTerm} for {plan.MonthlyIncomeDuration}</p>
+                </Col>
+
+                {/* Details */}
+                <Col md={6}>
+                  <h5 className="mb-2">{plan.Company} - {plan.PlanName}</h5>
+                  <div
+                    className="d-flex flex-column gap-1"
+                    style={{ fontSize: '0.9rem', color: '#555' }}
+                  >
+                    <div><strong>Premium:</strong> ₹{plan.PremiumPerYear}</div>
+                    <div><strong>Policy Term:</strong> {plan.PolicyTerm}</div>
+                    <div><strong>Premium Payment Term:</strong> {plan.PremiumPaymentTerm}</div>
+                    {plan.MonthlyIncomeAfterPremiumTerm && (
+                      <div><strong>Monthly Income:</strong> ₹{plan.MonthlyIncomeAfterPremiumTerm} for {plan.MonthlyIncomeDuration}</div>
+                    )}
+                    <div><strong>Maturity Benefit:</strong> ₹{plan.MaturityBenefit}</div>
+                    <div><strong>Life Cover:</strong> ₹{plan.LifeCover}</div>
+                  </div>
+
+                  {plan.Features?.length > 0 && (
+                    <div className="text-success small mt-2">
+                      <strong>Key Features:</strong>
+                      <ul className="mb-0 list-unstyled">
+                        {plan.Features.map((feature, idx) => (
+                          <li key={idx}>✔ {feature}</li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                  <p><strong>Maturity Benefit:</strong> ₹{plan.MaturityBenefit}</p>
-                  <p><strong>Life Cover:</strong> ₹{plan.LifeCover}</p>
-                  <ul>
-                    {plan.Features?.map((feature, idx) => (
-                      <li key={idx}>{feature}</li>
-                    ))}
-                  </ul>
-                  <Button variant="success" className="mt-3" onClick={() => handleSelectPlan(plan.planId)}>
-                    Select This Plan
+                </Col>
+
+                {/* Button */}
+                <Col md={3} className="text-center">
+                  <p className="mb-2"><strong>Starting From ₹{plan.PremiumPerYear}</strong></p>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="w-100 mt-2"
+                    onClick={() => handleSelectPlan(plan.planId)}
+                    disabled={loadingPlanId === plan.planId}
+                  >
+                    {loadingPlanId === plan.planId ? (
+                      <>
+                        <Spinner animation="border" size="sm" className="me-2" />
+                        Selecting...
+                      </>
+                    ) : (
+                      "Select Plan"
+                    )}
                   </Button>
-                </div>
-              </div>
-            </div>
+                </Col>
+              </Row>
+            </Card>
           ))
         ) : (
-          <p>No plans available. Please try again later.</p>
+          <p className="text-center">No plans available. Please try again later.</p>
         )}
       </div>
       <Footer />

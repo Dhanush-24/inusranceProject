@@ -188,11 +188,15 @@ const CarInsuranceCard = () => {
                         style={{ width: "80px", height: "50px", objectFit: "contain" }}
                       />
                     </Col>
-                    <Col md={7}>
-                      <h5 className="mb-1">{plan.insurerName}</h5>
-                      <p className="mb-1"><strong>Cashless Garages:</strong> {plan.cashlessGarages}</p>
-                      <p className="mb-1"><strong>Claims Settled:</strong> {plan.claimSettlementRatio}</p>
-                      <p className="mb-1"><strong>Coverage:</strong> Unlimited</p>
+                  <Col md={7}>
+                      <h5 className="mb-2">{plan.insurerName}</h5>
+
+                      <Row className="mb-2" style={{ fontSize: "0.9rem", color: "#555" }}>
+                        <Col xs={4}><strong>Garages:</strong> {plan.cashlessGarages}</Col>
+                        <Col xs={4}><strong>Claims:</strong> {plan.claimSettlementRatio}</Col>
+                        <Col xs={4}><strong>IDV Value:</strong> {plan.idvValue}</Col>
+                      </Row>
+
                       {Array.isArray(plan.specialBenefits) && plan.specialBenefits.length > 0 && (
                         <div className="text-success small mt-2">
                           <strong>Key Features:</strong>
@@ -204,6 +208,8 @@ const CarInsuranceCard = () => {
                         </div>
                       )}
                     </Col>
+
+
                     <Col md={3} className="text-center">
                       <p className="mb-2"><strong>Starting From ₹{plan.premiumAmount}</strong></p>
                       <Button variant="danger" className="w-100" onClick={() => startFlow(plan)}>
