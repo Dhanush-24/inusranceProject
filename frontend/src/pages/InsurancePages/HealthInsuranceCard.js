@@ -187,7 +187,20 @@ const HealthInsuranceCard = () => {
       <Modal show={showStep === 2} onHide={() => setShowStep(0)} centered>
         <Modal.Header closeButton><Modal.Title>Location & Coverage</Modal.Title></Modal.Header>
         <Modal.Body>
-          <input placeholder="Insure For (Self, Family...)" className="form-control mb-2" onChange={e => setFormData({ ...formData, insureFor: e.target.value })} />
+         <select
+            className="form-control mb-2"
+            value={formData.insureFor}
+            onChange={e => setFormData({ ...formData, insureFor: e.target.value })}
+          >
+            <option value="">Select Who You Want to Insure</option>
+            <option value="Self">Self</option>
+            <option value="Mother">Mother</option>
+            <option value="Father">Father</option>
+            <option value="Spouse">Spouse</option>
+            <option value="Son">Son</option>
+            <option value="Daughter">Daughter</option>
+          </select>
+
           <input placeholder="Pincode" className="form-control mb-2" onChange={e => setFormData({ ...formData, pincode: e.target.value })} />
           <input placeholder="District" className="form-control" onChange={e => setFormData({ ...formData, district: e.target.value })} />
         </Modal.Body>

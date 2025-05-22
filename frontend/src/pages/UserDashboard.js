@@ -269,7 +269,7 @@ const UserDashboard = () => {
                       const data = selectedPolicies[type];
 
                       // For Car and Bike, flatten nested data for display
-                      const displayData = (type === 'Car' || type === 'Bike') ? flattenData(data) : data;
+                      const displayData = (type === 'Car' || type === 'Bike'|| type === 'Investment') ? flattenData(data) : data;
 
                       return (
                         <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">

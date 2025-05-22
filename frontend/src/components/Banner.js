@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Banner = () => {
@@ -11,20 +12,24 @@ const Banner = () => {
     >
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img
-            src="https://static.insurancedekho.com/pwa/img/nfo/lic-desktop-banner.png"
-            className="d-block w-100"
-            alt="Banner 1"
-            style={{ height: '200px' }}
-          />
+          <Link to="/gaurented-insurance">
+            <img
+              src="https://static.insurancedekho.com/pwa/img/nfo/lic-desktop-banner.png"
+              className="d-block w-100"
+              alt="Banner 1"
+              style={{ height: '250px', cursor: 'pointer' }}
+            />
+          </Link>
         </div>
         <div className="carousel-item">
-          <img
-            src="https://www.godigit.com/content/dam/godigit/life/explore-li-desktop.png"
-            className="d-block w-90"
-            alt="Banner 2"
-            style={{ height: '200px', objectFit: 'cover' }}
-          />
+          <Link to="/car-insurance">
+            <img
+              src="https://www.libertyinsurance.in/images/car-insurance-banner-new.jpg"
+              className="d-block w-100"
+              alt="Banner 2"
+              style={{ height: '250px', objectFit: 'cover', cursor: 'pointer' }}
+            />
+          </Link>
         </div>
         
       </div>
