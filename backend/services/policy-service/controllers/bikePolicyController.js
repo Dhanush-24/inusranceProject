@@ -285,3 +285,74 @@ exports.saveBikeDetails = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+
+const bikePriceList = {
+  Hero: { Splendor: 70000, Passion: 75000, Glamour: 80000, HFDeluxe: 65000 },
+  Honda: { Activa: 80000, Shine: 85000, Unicorn: 95000, Dio: 75000 },
+  Bajaj: { Pulsar: 100000, Platina: 60000, Avenger: 110000, CT100: 55000 },
+  TVS: { Apache: 105000, Jupiter: 85000, Radeon: 70000, Sport: 60000 },
+  Yamaha: { FZ: 110000, R15: 150000, Fascino: 90000, RayZR: 88000 },
+  Suzuki: { Access: 85000, Gixxer: 115000, Burgman: 95000, Hayate: 70000 },
+  RoyalEnfield: { Classic350: 180000, Bullet350: 170000, Meteor350: 190000 },
+  KTM: { Duke200: 210000, Duke250: 230000, RC390: 310000 },
+};
+
+const getBikePrice = (brand, model) => {
+  const brandData = bikePriceList[brand];
+  if (!brandData) return 50000;
+  return brandData[model] || 50000;
+};
+
+const getDepreciationRate = (age) => {
+  if (age < 1) return 0.15;
+  if (age < 2) return 0.20;
+  if (age < 3) return 0.30;
+  if (age < 4) return 0.40;
+  return 0.50;
+};
+
+// Adjust this % as per your premium logic
+const estimatePremiumFromIDV = (idv) => Math.round(idv * 0.03); // 3% of IDV
+
+exports.getBikePlansByPremium = async (req, res) => {
+  try {
+    const { bikeBrand, bikeModel, registrationYear } = req.query;
+
+    if (!bikeBrand || !bikeModel || !registrationYear) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing bikeBrand, bikeModel, or registrationYear.",
+      });
+    }
+
+    const currentYear = new Date().getFullYear();
+    const bikeAge = currentYear - parseInt(registrationYear, 10);
+    const depreciation = getDepreciationRate(bikeAge);
+    const basePrice = getBikePrice(bikeBrand, bikeModel);
+    const calculatedIDV = Math.round(basePrice * (1 - depreciation));
+
+    const estimatedPremium = estimatePremiumFromIDV(calculatedIDV);
+    const lowerBound = estimatedPremium - 300; // e.g., ₹500 margin
+    const upperBound = estimatedPremium + 300;
+
+    const plans = await BikePolicyData.find({
+      annualPremium: { $gte: lowerBound, $lte: upperBound },
+    });
+
+    res.status(200).json({
+      success: true,
+      calculatedIDV,
+      estimatedPremium,
+      plans,
+    });
+  } catch (error) {
+    console.error("Error fetching bike plans by premium:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch bike plans by premium",
+      error: error.message,
+    });
+  }
+};

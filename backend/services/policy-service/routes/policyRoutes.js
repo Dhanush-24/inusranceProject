@@ -28,4 +28,8 @@ router.get('/policy-details/:mobileNumber', policyController.getPolicyDetailsByM
 router.get('/premium/:mobileNumber', policyController.getPremiumByMobile);
 router.get('/check-existing', policyController.checkCarNumberExists);
 
+
+router.get('/plans-near-idv', policyController.getPlansNearIDV);
+
+
 module.exports = router;

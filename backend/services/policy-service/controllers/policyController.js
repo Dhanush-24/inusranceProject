@@ -265,3 +265,76 @@ exports.selectPlan = async (req, res) => {
     });
   }
 };
+
+
+// Helper functions
+const priceList = {
+  Toyota: { Corolla: 1200000, Camry: 2200000, Prius: 2500000, RAV4: 2800000, Fortuner: 3200000 },
+  Honda: { Civic: 1500000, Accord: 2400000, "CR-V": 2600000, City: 1300000, Jazz: 1100000 },
+  Ford: { Figo: 700000, EcoSport: 900000, Mustang: 6000000, Endeavour: 3500000, Aspire: 800000 },
+  Hyundai: { i10: 600000, i20: 950000, Creta: 1500000, Verna: 1200000, Elantra: 1800000 },
+  Chevrolet: { Spark: 500000, Beat: 550000, Cruze: 1100000, Captiva: 2000000, Trailblazer: 2700000 },
+  Nissan: { Micra: 550000, Altima: 1700000, Sentra: 1400000, Juke: 1300000, Rogue: 2500000 },
+  Volkswagen: { Polo: 850000, Vento: 1100000, Passat: 2100000, Tiguan: 2200000, Golf: 2300000 },
+  BMW: { "3 Series": 4000000, "5 Series": 6000000, X1: 4200000, X3: 4800000, X5: 7500000 },
+  "Mercedes-Benz": { "A-Class": 3500000, "C-Class": 5000000, "E-Class": 7000000, GLA: 3800000, GLE: 8000000 },
+  Audi: { A3: 3000000, A4: 4500000, Q3: 4000000, Q5: 5500000, Q7: 7500000 },
+  Kia: { Seltos: 1400000, Sonet: 900000, Carnival: 2200000, Sportage: 2100000, Rio: 1000000 },
+  Mazda: { Mazda3: 1300000, "CX-3": 1500000, "CX-5": 2000000, Mazda6: 2300000, "MX-5": 2500000 },
+};
+
+const getManufacturerPrice = (brand, model) => {
+  const brandData = priceList[brand];
+  if (!brandData) return 600000; // fallback
+  const price = brandData[model];
+  return price || 600000; // fallback
+};
+
+const getDepreciationRate = (age) => {
+  if (age < 1) return 0.15;
+  if (age < 2) return 0.20;
+  if (age < 3) return 0.30;
+  if (age < 4) return 0.40;
+  return 0.50;
+};
+
+
+exports.getPlansNearIDV = async (req, res) => {
+  try {
+    const { carBrand, carModel, registrationYear } = req.query;
+
+    if (!carBrand || !carModel || !registrationYear) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing carBrand, carModel, or registrationYear.",
+      });
+    }
+
+    const currentYear = new Date().getFullYear();
+    const carAge = currentYear - parseInt(registrationYear, 10);
+    const depreciation = getDepreciationRate(carAge);
+    const basePrice = getManufacturerPrice(carBrand, carModel);
+    const calculatedIDV = Math.round(basePrice * (1 - depreciation));
+
+    // Define a range ±100000 around calculatedIDV
+    const lowerBound = calculatedIDV - 100000;
+    const upperBound = calculatedIDV + 100000;
+
+    // Query plans with idvValue within this range
+    const plans = await CarPolicy.find({
+      idvValue: { $gt: lowerBound, $lt: upperBound },
+    });
+
+    res.status(200).json({
+      success: true,
+      calculatedIDV,
+      plans,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch plans near IDV value",
+      error: error.message,
+    });
+  }
+};

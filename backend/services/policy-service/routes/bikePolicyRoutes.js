@@ -24,5 +24,6 @@ router.get('/plans', bikePolicyController.getBikeInsurancePlans);
 // POST route for selecting a plan
 router.post('/selectPlan', bikePolicyController.selectPlan);
 router.post("/details", bikePolicyController.saveBikeDetails);
+router.get('/plans-by-premium', bikePolicyController.getBikePlansByPremium);
 
 module.exports = router;
