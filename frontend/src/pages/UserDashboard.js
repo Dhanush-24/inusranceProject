@@ -89,18 +89,47 @@ const UserDashboard = () => {
         Object.entries(endpoints).forEach(([type, path]) => {
           axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/${path}/${userData.mobile}`)
             .then((res) => {
+              // Handle empty or no policy data explicitly
               setSelectedPolicies((prev) => ({
                 ...prev,
-                [type]: res.data.data,
+                [type]: res.data.data && res.data.data.length !== 0 ? res.data.data : null,
+              }));
+            })
+            .catch(() => {
+              // If API fails or no data, set null so UI can handle
+              setSelectedPolicies((prev) => ({
+                ...prev,
+                [type]: null,
               }));
             });
         });
 
         axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/payment/payment-details/${userData.mobile}`)
-          .then((res) => setPaymentHistory(res.data.data));
+          .then((res) => setPaymentHistory(res.data.data || []))
+          .catch(() => setPaymentHistory([]));
       })
-      .catch((err) => console.error('Failed to fetch user details:', err));
+      .catch((err) => {
+        console.error('Failed to fetch user details:', err);
+        setUserDetails(null);
+      });
   }, [mobile, user, navigate]);
+
+  const flattenData = (obj) => {
+    const result = {};
+    for (const key in obj) {
+      if (Array.isArray(obj[key])) {
+        result[key] = obj[key].join(', ');
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        const nested = flattenData(obj[key]);
+        for (const nestedKey in nested) {
+          result[`${key}.${nestedKey}`] = nested[nestedKey];
+        }
+      } else {
+        result[key] = obj[key];
+      }
+    }
+    return result;
+  };
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
@@ -154,7 +183,7 @@ const UserDashboard = () => {
           <div className="col-md-9">
             {userDetails ? (
               <div>
-                {/* Updated Personal Info Card */}
+                {/* Personal Info Card */}
                 <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
                   <h3 className="mb-4" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", fontWeight: 700 }}>
                     Personal Information
@@ -197,96 +226,93 @@ const UserDashboard = () => {
                 {showPayments && (
                   <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
                     <h5 className="mb-3">💳 Payment History</h5>
-                    <div className="table-responsive">
-                      <table className="table table-hover table-bordered">
-                        <thead className="table-primary">
-                          <tr>
-                            <th>Policy</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Method</th>
-                            <th>Payment ID</th>
-                            <th>Mobile</th>
-                            <th>Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {paymentHistory.map((p, i) => (
-                            <tr key={i}>
-                              <td>{p.policyType}</td>
-                              <td>₹{p.amount / 100}</td>
-                              <td>{p.status}</td>
-                              <td>{p.method}</td>
-                              <td>{p.paymentId}</td>
-                              <td>{p.mobile}</td>
-                              <td>{new Date(p.created_at * 1000).toLocaleString()}</td>
+                    {paymentHistory.length > 0 ? (
+                      <div className="table-responsive">
+                        <table className="table table-hover table-bordered">
+                          <thead className="table-primary">
+                            <tr>
+                              <th>Policy</th>
+                              <th>Amount</th>
+                              <th>Status</th>
+                              <th>Method</th>
+                              <th>Payment ID</th>
+                              <th>Mobile</th>
+                              <th>Date</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                          </thead>
+                          <tbody>
+                            {paymentHistory.map((p, i) => (
+                              <tr key={i}>
+                                <td>{p.policyType}</td>
+                                <td>₹{p.amount / 100}</td>
+                                <td>{p.status}</td>
+                                <td>{p.method}</td>
+                                <td>{p.paymentId}</td>
+                                <td>{p.mobile}</td>
+                                <td>{new Date(p.created_at * 1000).toLocaleString()}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <p>No payment history found.</p>
+                    )}
                   </div>
                 )}
 
                 {/* Active Policy Details */}
-                {activePolicy && selectedPolicies[activePolicy] && (() => {
-                  const type = activePolicy;
-                  const data = selectedPolicies[type];
+                {activePolicy ? (
+                  selectedPolicies[activePolicy] ? (
+                    (() => {
+                      const type = activePolicy;
+                      const data = selectedPolicies[type];
 
-                  const flattenData = (obj) => {
-                    const result = {};
-                    for (const key in obj) {
-                      if (Array.isArray(obj[key])) {
-                        result[key] = obj[key].join(', ');
-                      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-                        const nested = flattenData(obj[key]);
-                        for (const nestedKey in nested) {
-                          result[`${key}.${nestedKey}`] = nested[nestedKey];
-                        }
-                      } else {
-                        result[key] = obj[key];
-                      }
-                    }
-                    return result;
-                  };
+                      // For Car and Bike, flatten nested data for display
+                      const displayData = (type === 'Car' || type === 'Bike') ? flattenData(data) : data;
 
-                  const displayData = type === 'Car' || type === 'Bike' ? flattenData(data) : data;
-
-                  return (
-                    <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
-                      <h5 className="mb-3">📃 {type} Policy Details</h5>
-                      <div className="table-responsive">
-                        <table className="table table-striped table-bordered">
-                          <thead className="table-secondary">
-                            <tr>
-                              {Object.keys(displayData).map((key) => (
-                                <th key={key}>{key}</th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              {Object.values(displayData).map((value, i) => (
-                                <td key={i}>{String(value)}</td>
-                              ))}
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                      return (
+                        <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
+                          <h5 className="mb-3">📃 {type} Policy Details</h5>
+                          <div className="table-responsive">
+                            <table className="table table-striped table-bordered">
+                              <thead className="table-secondary">
+                                <tr>
+                                  {Object.keys(displayData).map((key) => (
+                                    <th key={key}>{key}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  {Object.values(displayData).map((value, i) => (
+                                    <td key={i}>{value}</td>
+                                  ))}
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      );
+                    })()
+                  ) : (
+                    <div className="alert alert-info">
+                      No {activePolicy} policy found for your account.
                     </div>
-                  );
-                })()}
+                  )
+                ) : null}
+
+                {/* Customer Speak Section */}
+                <CustomerSpeak />
               </div>
             ) : (
-              <div className="text-center my-5">
-                <div className="spinner-border text-primary" role="status" />
-                <p className="mt-2">Loading user data...</p>
+              <div className="alert alert-warning text-center">
+                Loading user details or user not found.
               </div>
             )}
           </div>
         </div>
       </div>
-      <CustomerSpeak />
       <Footer />
     </div>
   );

@@ -33,6 +33,7 @@ const BikeInsuranceCard = () => {
   const [loading, setLoading] = useState(false);
   const [formStep, setFormStep] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [bikeNumberError, setBikeNumberError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,14 +59,23 @@ const BikeInsuranceCard = () => {
   };
 
 const submitBikeNumber = () => {
-  if (!formData.bikeNumber.trim()) {
+  const bikeNumber = formData.bikeNumber.trim().toUpperCase(); // convert to uppercase for consistency
+  const regex = /^[A-Z]{2}-\d{2}-\d{4}$/;
+
+  if (!bikeNumber) {
     alert("Enter bike number");
     return;
   }
 
-  // Save bike number to localStorage
-  localStorage.setItem("bikeNumber", formData.bikeNumber.trim());
+  if (!regex.test(bikeNumber)) {
+    alert("Invalid bike number format. Format must be XX-00-0000 (e.g. MH-12-1234)");
+    return;
+  }
 
+  // Save bike number to localStorage
+  localStorage.setItem("bikeNumber", bikeNumber);
+
+  setFormData((prev) => ({ ...prev, bikeNumber })); // Update with uppercase formatted number
   setFormStep(2);
 };
 

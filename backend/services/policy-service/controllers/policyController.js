@@ -158,15 +158,22 @@ exports.savePreviousPolicy = async (req, res) => {
 // Check Car Number Exists
 exports.checkCarNumberExists = async (req, res) => {
   try {
-    const { carNumber } = req.query;
+    const { carNumber } = req.body;  // <-- get from body instead of query
+
     if (!carNumber) return res.status(400).json({ message: "Car number is required." });
 
-    const exists = await Policy.findOne({ carNumber });
+    const carNumberRegex = /^[A-Z]{2}-\d{2}-[A-Z]{2}-\d{4}$/;
+    if (!carNumberRegex.test(carNumber)) {
+      return res.status(400).json({ message: "Invalid car number format." });
+    }
+
+    const exists = await Policy.findOne({ carNumber: { $regex: `^${carNumber}$`, $options: 'i' } });
     res.status(200).json({ exists: !!exists });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // Get Policy by Mobile Number
 exports.getPolicyDetailsByMobile = async (req, res) => {

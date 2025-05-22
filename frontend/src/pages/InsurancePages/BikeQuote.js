@@ -203,7 +203,7 @@ const BikeQuote = () => {
                   <p className="mb-2">
                     <strong>
                       Starting From ₹
-                      {plan?.annualPremium ?? plan?.premiumAmount ?? "N/A"}
+                      {plan?.annualPremium ?? plan?.annualPremium ?? "N/A"}
                     </strong>
                   </p>
                   <Button

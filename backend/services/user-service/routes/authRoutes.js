@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { sendOTP, verifyOTP, addUserDetails ,checkMobile,getUserDashboard } = require('../controllers/authController');
+const { registerUser, loginUser, getUserDashboard } = require('../controllers/authController');
 
-router.post('/send-otp', sendOTP);
-router.post('/verify-otp', verifyOTP);
-router.post('/add-details', addUserDetails);
-router.get('/dashboard/:mobile', getUserDashboard);
-router.post('/check-mobile', checkMobile);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.get('/dashboard/:mobile', getUserDashboard)
 
 module.exports = router;
+

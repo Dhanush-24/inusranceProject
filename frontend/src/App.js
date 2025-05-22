@@ -27,6 +27,7 @@ import HealthNewsCard from './components/news/HealthNewsCard';
 import TermInsuranceNews from './components/news/TermInsuranceNews';
 import BusinessInsuranceNews from './components/news/BusinessInsuranceNews';
 import InvestmentInsuranceNews from './components/news/InvestmentInsuranceNews';
+import UserLoginPage from './components/UserLoginPage';
 
 
 const App = () => {
@@ -43,6 +44,8 @@ const App = () => {
             path="/dashboard" 
             element={userMobile ? <Dashboard mobile={userMobile} /> : <Navigate to="/" />} 
           />
+
+          <Route path="/user-login" element={<UserLoginPage />} />
 
           {/* Admin & User Pages */}
           <Route path="/admin/login" element={<AdminLogin />} />

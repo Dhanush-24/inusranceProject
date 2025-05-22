@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const BikePolicySchema = new mongoose.Schema({
   bikeNumber: {
     type: String,
+    unique: true,
     required: true,
     trim: true,
     validate: {

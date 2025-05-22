@@ -5,6 +5,7 @@ const policySchema = new mongoose.Schema(
   {
     carNumber: {
       type: String,
+      unique: true,
       required: true,
       trim: true,
       validate: {

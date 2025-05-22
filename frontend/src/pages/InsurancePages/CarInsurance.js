@@ -114,7 +114,7 @@ const submitCarNumber = () => {
       setFormStep(3);
     } catch (err) {
       console.error("Error submitting car details:", err);
-      alert("Failed to submit car details.");
+      alert("Failed to submit car details. CarNumber already exists");
     }
   };
 
