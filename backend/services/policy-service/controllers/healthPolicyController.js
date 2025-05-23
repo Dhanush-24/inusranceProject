@@ -153,28 +153,27 @@ exports.selectPlan = async (req, res) => {
   }
 };
 
-
 exports.getHealthPolicyDetailsByMobile = async (req, res) => {
   try {
-    const { mobile } = req.params;  // Ensure this is correct
+    const { mobile } = req.params;
 
     if (!mobile) {
       return res.status(400).json({ message: "Mobile number is required." });
     }
 
-    const policy = await HealthPolicy.findOne({ mobile: mobile });
-    console.log("Mobile:", req.params.mobile);
+    const policies = await HealthPolicy.find({ mobile });
+    console.log("Mobile:", mobile);
 
-
-    if (!policy) {
-      return res.status(404).json({ message: "Health policy not found for this mobile number." });
+    if (!policies || policies.length === 0) {
+      return res.status(404).json({ message: "Health policies not found for this mobile number." });
     }
 
-    res.status(200).json({ success: true, data: policy });
+    res.status(200).json({ success: true, data: policies });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 exports.getHealthPremiumByMobile = async (req, res) => {

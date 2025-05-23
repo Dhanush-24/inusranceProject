@@ -150,7 +150,7 @@ exports.getGaurentedPolicyDetailsByMobile = async (req, res) => {
       return res.status(400).json({ message: "Mobile number is required." });
     }
 
-    const policy = await GaurentedPolicy.findOne({ mobile: mobile });  // Find policy by mobile
+    const policy = await GaurentedPolicy.find({ mobile: mobile });  // Find policy by mobile
 
     console.log("Mobile:", req.params.mobile);  // Log the mobile number for debugging
 

@@ -13,6 +13,9 @@ const paymentSchema = new mongoose.Schema({
   mobile: String,
   policyType: String,
   created_at: Number,
-});
+},
+  {
+    timestamps: true, // Adds createdAt and updatedAt fields
+  });
 
 module.exports = mongoose.model("Payment", paymentSchema);

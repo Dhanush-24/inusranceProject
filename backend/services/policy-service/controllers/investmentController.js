@@ -154,7 +154,7 @@ exports.getInvestmentPolicyDetailsByMobile = async (req, res) => {
       return res.status(400).json({ message: "Mobile number is required." });
     }
 
-    const policy = await investmentPolicy.findOne({ mobile });
+    const policy = await investmentPolicy.find({ mobile });
     if (!policy) {
       return res.status(404).json({ message: "Policy not found for this mobile number." });
     }

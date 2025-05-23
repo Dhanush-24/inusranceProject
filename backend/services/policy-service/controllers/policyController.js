@@ -179,16 +179,23 @@ exports.checkCarNumberExists = async (req, res) => {
 exports.getPolicyDetailsByMobile = async (req, res) => {
   try {
     const { mobileNumber } = req.params;
-    if (!mobileNumber) return res.status(400).json({ message: "Mobile number is required." });
+    if (!mobileNumber) {
+      return res.status(400).json({ message: "Mobile number is required." });
+    }
 
-    const policy = await Policy.findOne({ "userInfo.mobileNumber": mobileNumber });
-    if (!policy) return res.status(404).json({ message: "Policy not found." });
+    // Use find() to get all policies matching the mobile number
+    const policies = await Policy.find({ "userInfo.mobileNumber": mobileNumber });
 
-    res.status(200).json({ success: true, data: policy });
+    if (!policies || policies.length === 0) {
+      return res.status(404).json({ message: "No policies found for this mobile number." });
+    }
+
+    res.status(200).json({ success: true, data: policies });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // Get Premium by Mobile Number
 exports.getPremiumByMobile = async (req, res) => {

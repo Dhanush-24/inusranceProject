@@ -134,17 +134,18 @@ exports.getBikePolicyDetailsByMobile = async (req, res) => {
       return res.status(400).json({ message: "Mobile number is required." });
     }
 
-    const policy = await BikePolicy.findOne({ "userInfo.mobileNumber": mobileNumber });
+    const policies = await BikePolicy.find({ "userInfo.mobileNumber": mobileNumber });
 
-    if (!policy) {
-      return res.status(404).json({ message: "Bike policy not found for this mobile number." });
+    if (!policies || policies.length === 0) {
+      return res.status(404).json({ message: "Bike policies not found for this mobile number." });
     }
 
-    res.status(200).json({ success: true, data: policy });
+    res.status(200).json({ success: true, data: policies });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 exports.getBikeInsurancePlans = async (req, res) => {
   try {

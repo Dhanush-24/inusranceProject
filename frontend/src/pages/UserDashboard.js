@@ -21,19 +21,37 @@ const UserDashboard = () => {
     Investment: null,
     Term: null,
   });
-  const [activePolicy, setActivePolicy] = useState(null);
   const [showPayments, setShowPayments] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [paymentDueNotifications, setPaymentDueNotifications] = useState([]);
+
+
+  const [selectedPolicyType, setSelectedPolicyType] = useState(null);
+  const [showFullDetails, setShowFullDetails] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-  const handlePayPremium = async () => {
-    const type = prompt("Enter policy type (car, bike, health, term, guaranteed, investment):")?.toLowerCase();
-    const userMobile = prompt("Enter your mobile number:");
-    if (!type || !userMobile) return alert("Both fields are required.");
+  const [notificationDismissed, setNotificationDismissed] = useState(
+  localStorage.getItem('notificationsDismissed') === 'true'
+);
 
+const handleDismissNotification = () => {
+  setNotificationDismissed(true);
+  localStorage.setItem('notificationsDismissed', 'true');
+};
+
+
+  const handleSelectPolicyType = (type) => {
+    setSelectedPolicyType((prev) => (prev === type ? null : type));
+  };
+
+  // Modified pay premium function to accept params (policyType, userMobile)
+  const handlePayPremium = async (policyType, userMobile) => {
+    const type = policyType.toLowerCase();
     const validTypes = ["car", "bike", "health", "term", "guaranteed", "investment"];
+
     if (!validTypes.includes(type)) return alert("Invalid policy type.");
+    if (!userMobile) return alert("User mobile number is required.");
 
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payment/create-order`, { type, mobile: userMobile });
@@ -89,14 +107,12 @@ const UserDashboard = () => {
         Object.entries(endpoints).forEach(([type, path]) => {
           axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/${path}/${userData.mobile}`)
             .then((res) => {
-              // Handle empty or no policy data explicitly
               setSelectedPolicies((prev) => ({
                 ...prev,
                 [type]: res.data.data && res.data.data.length !== 0 ? res.data.data : null,
               }));
             })
             .catch(() => {
-              // If API fails or no data, set null so UI can handle
               setSelectedPolicies((prev) => ({
                 ...prev,
                 [type]: null,
@@ -131,48 +147,145 @@ const UserDashboard = () => {
     return result;
   };
 
+  const filterPolicyData = (data) => {
+    const flattened = flattenData(data);
+    return Object.entries(flattened).filter(([key]) => {
+      if (!showFullDetails) {
+        const keyLower = key.toLowerCase();
+        return ['name', 'mobile', 'company', 'planname', 'premium'].some(field => keyLower.includes(field));
+      }
+      return !['__v', '_v'].includes(key); // include _id in full view
+    });
+  };
+
+   const computePaymentDueNotifications = (payments) => {
+    const oneYearMs = 365 * 24 * 60 * 60 * 1000;
+    // Group payments by policyType and find latest payment date per type
+    const latestPaymentsByType = {};
+
+    payments.forEach(({ policyType, created_at }) => {
+      const paymentDate = new Date(created_at * 1000);
+      if (
+        !latestPaymentsByType[policyType] ||
+        paymentDate > latestPaymentsByType[policyType]
+      ) {
+        latestPaymentsByType[policyType] = paymentDate;
+      }
+    });
+
+    // For each policyType with a payment, calculate days remaining
+    const notifications = Object.entries(latestPaymentsByType).map(
+      ([policyType, lastPaymentDate]) => {
+        const dueDate = new Date(lastPaymentDate.getTime() + oneYearMs);
+        const now = new Date();
+        const diffMs = dueDate - now;
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 0) {
+          return `Your ${policyType} policy payment is due today or overdue.`;
+        } else {
+          return `Your ${policyType} policy payment is due in ${diffDays} day${diffDays > 1 ? 's' : ''}.`;
+        }
+      }
+    );
+
+    return notifications;
+  };
+
+  // Update notifications whenever paymentHistory changes
+  useEffect(() => {
+    if (paymentHistory.length > 0) {
+      const notifications = computePaymentDueNotifications(paymentHistory);
+      setPaymentDueNotifications(notifications);
+    } else {
+      setPaymentDueNotifications([]);
+    }
+  }, [paymentHistory]);
+
+  useEffect(() => {
+  if (paymentDueNotifications.length > 0) {
+    setNotificationDismissed(false);
+    localStorage.removeItem('notificationsDismissed');
+  }
+}, [paymentDueNotifications.length]);
+
+
+
+
+
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
       <Navbar />
+
+       <div className="container my-2 flex-grow-1">
+  {!notificationDismissed && paymentDueNotifications.length > 0 && (
+    <div className="alert alert-warning position-relative">
+      <button
+        type="button"
+        className="btn-close position-absolute top-0 end-0 m-3"
+        aria-label="Close"
+        onClick={handleDismissNotification}
+      ></button>
+      <h5>🔔 Payment Due Notifications</h5>
+      <ul>
+        {paymentDueNotifications.map((msg, i) => (
+          <li key={i}>{msg}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>
+
+
       <div className="container my-5 flex-grow-1">
         <div className="row">
           <div className="col-md-3 mb-4">
             <div className="card shadow rounded p-3 border-0 bg-white text-start">
               <h5 className="mb-3">👤 Dashboard Menu</h5>
-              <button className="btn btn-outline-primary mb-2 w-100" onClick={() => {
-                setShowPayments(false);
-                setActivePolicy(null);
-              }}>🏠 User Profile</button>
+              <button
+                className="btn btn-outline-primary mb-2 w-100"
+                onClick={() => {
+                  setShowPayments(false);
+                  setSelectedPolicyType(null);
+                }}
+              >
+                🏠 User Profile
+              </button>
 
               <button className="btn btn-outline-primary mb-2 w-100" onClick={toggleDropdown}>
                 📄 View Policies
               </button>
+              
 
               {dropdownOpen && (
                 <div className="ms-2 mb-3">
                   {Object.keys(selectedPolicies).map((type) => (
-                    <button
+                    <div
                       key={type}
-                      className={`btn btn-outline-secondary mb-2 w-100 text-start ${activePolicy === type ? 'active' : ''}`}
+                      className="text-start mb-1"
+                      style={{ cursor: 'pointer', fontWeight: selectedPolicyType === type ? 'bold' : 'normal' }}
                       onClick={() => {
                         setShowPayments(false);
-                        setActivePolicy(type);
+                        setSelectedPolicyType(type);
+                        setDropdownOpen(false);
                       }}
                     >
-                      {type} Policy
-                    </button>
+                      <strong>{type} Policy:</strong> {selectedPolicies[type] ? "Available" : "Not found"}
+                    </div>
                   ))}
                 </div>
               )}
 
-              <button className="btn btn-outline-primary mb-2 w-100" onClick={() => {
-                setActivePolicy(null);
-                setShowPayments((prev) => !prev);
-              }}>💳 Payment History</button>
-
-              <button className="btn btn-success w-100 mb-2" onClick={handlePayPremium}>
-                💰 Pay Premium
+              <button
+                className="btn btn-outline-primary mb-2 w-100"
+                onClick={() => {
+                  setShowPayments((prev) => !prev);
+                  setSelectedPolicyType(null);
+                }}
+              >
+                💳 Payment History
               </button>
+
 
               <button className="btn btn-danger w-100" onClick={logout}>
                 🚪 Logout
@@ -183,33 +296,16 @@ const UserDashboard = () => {
           <div className="col-md-9">
             {userDetails ? (
               <div>
-                {/* Personal Info Card */}
+                {/* Personal Info */}
                 <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
-                  <h3 className="mb-4" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", fontWeight: 700 }}>
-                    Personal Information
-                  </h3>
+                  <h3 className="mb-4">Personal Information</h3>
                   <div className="row">
                     <div className="col-md-8">
-                      <div className="row mb-2">
-                        <div className="col-4 fw-bold">Full Name:</div>
-                        <div className="col-8">{userDetails.name}</div>
-                      </div>
-                      <div className="row mb-2">
-                        <div className="col-4 fw-bold">Gender:</div>
-                        <div className="col-8">{userDetails.gender}</div>
-                      </div>
-                      <div className="row mb-2">
-                        <div className="col-4 fw-bold">Birth Date:</div>
-                        <div className="col-8">{new Date(userDetails.dob).toLocaleDateString()}</div>
-                      </div>
-                      <div className="row mb-2">
-                        <div className="col-4 fw-bold">Email:</div>
-                        <div className="col-8">{userDetails.email}</div>
-                      </div>
-                      <div className="row mb-2">
-                        <div className="col-4 fw-bold">Mobile:</div>
-                        <div className="col-8">{userDetails.mobile}</div>
-                      </div>
+                      <div className="row mb-2"><div className="col-4 fw-bold">Full Name:</div><div className="col-8">{userDetails.name}</div></div>
+                      <div className="row mb-2"><div className="col-4 fw-bold">Gender:</div><div className="col-8">{userDetails.gender}</div></div>
+                      <div className="row mb-2"><div className="col-4 fw-bold">Birth Date:</div><div className="col-8">{new Date(userDetails.dob).toLocaleDateString()}</div></div>
+                      <div className="row mb-2"><div className="col-4 fw-bold">Email:</div><div className="col-8">{userDetails.email}</div></div>
+                      <div className="row mb-2"><div className="col-4 fw-bold">Mobile:</div><div className="col-8">{userDetails.mobile}</div></div>
                     </div>
                     <div className="col-md-4 d-flex justify-content-center align-items-start">
                       <img
@@ -261,58 +357,53 @@ const UserDashboard = () => {
                   </div>
                 )}
 
-                {/* Active Policy Details */}
-                {activePolicy ? (
-                  selectedPolicies[activePolicy] ? (
-                    (() => {
-                      const type = activePolicy;
-                      const data = selectedPolicies[type];
+                {/* Policies */}
+                {selectedPolicyType && (
+                  <div className="card p-4 shadow-sm border-0 rounded bg-white">
+                    <h4 className="mb-3">{selectedPolicyType} Policy Details</h4>
+                    <button
+                      className="btn btn-outline-secondary mb-3"
+                      onClick={() => setShowFullDetails((prev) => !prev)}
+                    >
+                      {showFullDetails ? 'Show Filtered Details' : 'Show All Details'}
+                    </button>
 
-                      // For Car and Bike, flatten nested data for display
-                      const displayData = (type === 'Car' || type === 'Bike'|| type === 'Investment') ? flattenData(data) : data;
+                    {selectedPolicies[selectedPolicyType] && selectedPolicies[selectedPolicyType].length > 0 ? (
+                      selectedPolicies[selectedPolicyType].map((policy, idx) => (
+                        <div key={idx} className="mb-4 border-bottom pb-3">
+                          {filterPolicyData(policy).map(([key, val]) => (
+                            <div className="row mb-1" key={key}>
+                              <div className="col-4 fw-semibold text-capitalize">{key.replace(/_/g, ' ')}:</div>
+                              <div className="col-8">{String(val)}</div>
+                            </div>
+                          ))}
 
-                      return (
-                        <div className="card p-4 mb-4 shadow-sm border-0 rounded bg-white">
-                          <h5 className="mb-3">📃 {type} Policy Details</h5>
-                          <div className="table-responsive">
-                            <table className="table table-striped table-bordered">
-                              <thead className="table-secondary">
-                                <tr>
-                                  {Object.keys(displayData).map((key) => (
-                                    <th key={key}>{key}</th>
-                                  ))}
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  {Object.values(displayData).map((value, i) => (
-                                    <td key={i}>{value}</td>
-                                  ))}
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                          {/* Pay Premium button below each policy */}
+                          <button
+                            className="btn btn-primary mt-3"
+                            onClick={() => handlePayPremium(selectedPolicyType, policy.mobile || userDetails.mobile)}
+                          >
+                            💰 Pay Premium
+                          </button>
                         </div>
-                      );
-                    })()
-                  ) : (
-                    <div className="alert alert-info">
-                      No {activePolicy} policy found for your account.
-                    </div>
-                  )
-                ) : null}
-
-                {/* Customer Speak Section */}
-                <CustomerSpeak />
+                      ))
+                    ) : (
+                      <p>No {selectedPolicyType} policy found.</p>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
-              <div className="alert alert-warning text-center">
-                Loading user details or user not found.
+              <div>
+                <h2>Loading user details...</h2>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      <CustomerSpeak />
+
       <Footer />
     </div>
   );

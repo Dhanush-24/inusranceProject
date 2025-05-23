@@ -135,7 +135,7 @@ exports.getTermPolicyDetailsByMobile = async (req, res) => {
     console.log("Requested Mobile Number:", mobile);
 
     // Fetch the term policy using the mobile number
-    const policy = await TermPolicy.findOne({ mobile });
+    const policy = await TermPolicy.find({ mobile });
 
     if (!policy) {
       return res.status(404).json({ message: "Term policy not found for this mobile number." });
