@@ -29,8 +29,8 @@ const LoginModal = ({ show, handleClose, onLogin }) => {
 
     try {
       const endpoint = isRegister
-        ? 'http://localhost:5001/api/auth/register'
-        : 'http://localhost:5001/api/auth/login';
+        ? (`${process.env.REACT_APP_API_BASE_URL}/api/auth/register`)
+        : (`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`);
 
       const payload = isRegister
         ? form
